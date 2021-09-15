@@ -7,7 +7,7 @@ const loggerError = log4js.getLogger('error');
 
 const routerInfoRandom = express.Router()
 ///////////////////// RUTA INFO /////////////////////
-app.get('/info', (req, res) => {
+routerInfoRandom.get('/info', (req, res) => {
     let informacion = {}
     informacion['Argumentos de entrada:'] = `${process.argv[2]} ${process.argv[3]} ${process.argv[4]} ${process.argv[5]}`;
     informacion['Nombre de plataforma:'] = process.platform;
@@ -24,7 +24,7 @@ app.get('/info', (req, res) => {
 
 //////////////////// NUMERO RANDOM ////////////////////
 
-app.get('/random', (req, res) => {
+routerInfoRandom.get('/random', (req, res) => {
     const numeroRandom = fork('../api/numeroRandom.js')
     let cantidad = 0
     if (req.query.cant & !isNaN(req.query.cant)) {

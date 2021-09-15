@@ -10,16 +10,16 @@ const routerUsuarios = express.Router();
 
 // LOGIN CON FACEBOOK
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
+routerUsuarios.get('/auth/facebook', passport.authenticate('facebook'));
 
-app.get('/auth/facebook/callback', passport.authenticate('facebook',
+routerUsuarios.get('/auth/facebook/callback', passport.authenticate('facebook',
     {
         successRedirect: '/login',
         failureRedirect: '/faillogin'
     }
 ));
 
-app.get('/login', (req, res) => {
+routerUsuarios.get('/login', (req, res) => {
 
     Ethereal.enviarMailLogIn(req.user.email, req.user.name);
     Gmail.enviarMail(req.user.email, req.user.picture.data.url)
@@ -33,12 +33,12 @@ app.get('/login', (req, res) => {
     });
 })
 
-app.get('/faillogin', (req, res) => {
+routerUsuarios.get('/faillogin', (req, res) => {
     res.sendFile(__dirname + '/public/failLogin.html')
 })
 
 // LOGOUT
-app.get('/logout', (req, res) => {
+routerUsuarios.get('/logout', (req, res) => {
     Ethereal.enviarMailLogOut(req.user.email, req.user.name)
     req.logout();
     res.sendFile(__dirname + '/public/logout.html')

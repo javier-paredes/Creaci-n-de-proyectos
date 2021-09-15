@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express');
-const productos = require('../api/productos')   // BASE DE DATOS DE MONGO
+const productos = require('../api/productos') 
+const Faker = require('../models/faker');
 const log4js = require("log4js");
 
 const loggerConsola = log4js.getLogger('consola');
